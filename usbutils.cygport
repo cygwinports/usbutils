@@ -1,0 +1,19 @@
+NAME="usbutils"
+VERSION=007
+RELEASE=1
+CATEGORY="System"
+SUMMARY="List USB devices"
+DESCRIPTION="The USB Utils package contains utilities used to display
+information about USB buses in the system and the devices connected to
+them."
+HOMEPAGE="http://www.linux-usb.org/"
+SRC_URI="https://www.kernel.org/pub/linux/utils/usb/usbutils/usbutils-${VERSION}.tar.xz"
+# provide newer usb.ids
+SRC_URI+=" http://www.linux-usb.org/usb.ids"
+
+src_install() {
+	cd ${B}
+	# usb-devices(1) and lsusb.py requires /sys/bus interface
+	cyginstall bin_SCRIPTS=
+	rm -f ${D}/usr/share/man/man1/usb-devices.1*
+}
